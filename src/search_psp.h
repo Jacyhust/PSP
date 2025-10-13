@@ -120,48 +120,50 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
     // std::vector<std::vector<int>> init_nodes_clusters;
     // read_kmeans(filename, query_num, query_cluster, init_nodes_clusters, 100);
 
-    auto num = 0.0;
+    // auto num = 0.0;
+    std::atomic<size_t> num = 0;
 
     std::vector<std::pair<float, float>> cal_pair;
 
     int Qnum = 100;
-    int t = 160;
+    int t = 1;
 
     size_t cost1 = _G_COST;
     int nq = t * Qnum;
 
     std::vector<std::vector<unsigned> > res(nq);
-    for(unsigned i = 0; i < query_num; i++) res[i].resize(K);
+    for(unsigned i = 0; i < nq; i++) res[i].resize(K);
 
     std::vector<queryN> qs;
     for(int j = 0; j < nq; j++) {
-        qs.emplace_back(j % Qnum, 1, 1, prep, 1);
+        qs.emplace_back(j % Qnum, 1, K, prep, 1);
     }
 
     auto start = std::chrono::high_resolution_clock::now();
 
-
+    lsh::timer timer;
+    timer.restart();
     printf("Start searching %d queries with %d threads\n", nq, 160);
-#pragma omp parallel for
+    // #pragma omp parallel for
     for(unsigned i = 0; i < nq; i++) {
         //std::cout << "searching " << cal_inner_product(qs[i].queryPoint, data_load + 0 * dim, dim) << " th query" << std::endl;
-        int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + (i % Qnum) * dim, data_load, K, paras, res[i].data());
-        // int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(qs[i].queryPoint, data_load, K, paras, res[i].data());
-        // for(auto& x : res[i]) qs[i].res.push_back(Res(x, cal_inner_product(qs[i].queryPoint, data_load + x * dim, dim)));
+        // int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + (i % Qnum) * dim, data_load, K, paras, res[i].data());
+        int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(qs[i].queryPoint, data_load, K, paras, res[i].data());
+        for(auto& x : res[i]) qs[i].res.push_back(Res(x, cal_inner_product(qs[i].queryPoint, data_load + x * dim, dim)));
         num += dis_cal;
     }
 
     auto end = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Average Distance Computation: " << num / (int)query_num << std::endl;
-    std::cout << "Average Query Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / static_cast<double>(query_num) << "ms" << std::endl;
-
+    std::cout << "Average Distance Computation: " << num / (float)nq << std::endl;
+    std::cout << "Average Query Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms" << std::endl;
+    std::cout << "Average Query Time: " << timer.elapsed() << "ms" << std::endl;
     Performance<queryN> perform;
     for(int j = 0; j < nq; j++) {
         perform.update(qs[j], prep);
     }
-    float mean_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / static_cast<double>(query_num) / nq;
-    std::cout << "AVG QUERY TIME:    " << mean_time << "ms." << std::endl << std::endl;
+    float mean_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / (float)nq;
+    std::cout << "QPS:               " << 1000 / mean_time << std::endl << std::endl;
     std::cout << "AVG RECALL:        " << ((float)perform.NN_num) / (perform.num * res[0].size()) << std::endl;
     std::cout << "AVG RATIO:         " << ((float)perform.ratio) / (perform.res_num) << std::endl;
 

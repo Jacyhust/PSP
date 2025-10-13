@@ -1,8 +1,3 @@
-// Fargo Project: Revised by Xi ZHAO -- Nov 16, 2022
-
-// For PVDLB 2023: FARGO: Fast Maximum Inner Product Search via Global Multi-Probing
-
-// For any question, please feel free to contact me. Email: xzhaoca@connect.ust.hk
 
 #include <iostream>
 #include <fstream>
@@ -117,7 +112,7 @@ int main(int argc, char const* argv[]){
     p.M = 5;
     p.output_path = "./indexes/" + dataset + ".psp";
     p.sL = 150;
-    p.sK = 100;
+    p.sK = 10;
     p.result_path = "./results/" + dataset + ".txt";
 
 
