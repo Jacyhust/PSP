@@ -1,14 +1,33 @@
 #pragma once
 
-#include <pthread.h>
+//#include <pthread.h>
+#include <thread>
 #include <cstddef>
 #include <cstring>
 #include <mutex>
 #include <random>
 #include <vector>
-
+#include <windows.h>
 #include "util.h"
+#include <mutex>
+#include "pthread.h"
+CRITICAL_SECTION cs;
 
+void initializeCriticalSection() {
+    InitializeCriticalSection(&cs);
+}
+
+void deleteCriticalSection() {
+    DeleteCriticalSection(&cs);
+}
+
+void lockCriticalSection() {
+    EnterCriticalSection(&cs);
+}
+
+void unlockCriticalSection() {
+    LeaveCriticalSection(&cs);
+}
 namespace efanna2e {
 
 struct Neighbor {
@@ -41,7 +60,7 @@ struct IpNeighbor {
 
 typedef std::lock_guard<std::mutex> LockGuard;
 struct nhood {
-  // std::mutex lock;
+  //std::mutex lock;
   pthread_mutex_t lock;
   std::vector<Neighbor> pool;
   unsigned M;

@@ -108,7 +108,7 @@ float* data_align(float* data_ori, unsigned point_num, unsigned& dim) {
 #define DATA_ALIGN_FACTOR 1
 #endif
 #endif
-#endif
+
   float* data_new = 0;
   unsigned new_dim =
       (dim + DATA_ALIGN_FACTOR - 1) / DATA_ALIGN_FACTOR * DATA_ALIGN_FACTOR;
@@ -135,5 +135,7 @@ float* data_align(float* data_ori, unsigned point_num, unsigned& dim) {
 
   return data_new;
 }
-
+#else
+#define DATA_ALIGN_FACTOR 8
+#endif
 }
