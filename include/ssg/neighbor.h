@@ -6,7 +6,7 @@
 #include <mutex>
 #include <random>
 #include <vector>
-
+#include <mutex>
 #include "util.h"
 
 namespace efanna2e {

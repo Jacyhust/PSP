@@ -563,6 +563,15 @@ namespace efanna2e {
     Load_nn_graph(nn_graph_path.c_str());
     std::cout << "Load nn graph" << std::endl;
     data_ = data;
+
+    printf("Data head: \n");
+    std::cout << data_[0] << std::endl;
+    std::cout << data_[1] << std::endl;
+    std::cout << data_[2] << std::endl;
+    std::cout << data_[3] << std::endl;
+    std::cout << data_[4] << std::endl;
+    std::cout << data_[5] << std::endl;
+
     init_graph(parameters);
     std::cout << "Init done" << std::endl;
     SimpleNeighbor* cut_graph_ = new SimpleNeighbor[nd_ * (size_t)range];

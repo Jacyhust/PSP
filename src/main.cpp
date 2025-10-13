@@ -74,6 +74,9 @@ void build_index(float* data_load, unsigned points_num, unsigned dim, params p){
     std::cout << "Build Time: " << diff.count() << "\n";
 
     index.Save(p.output_path.c_str());
+
+    printf("Data head1: \n");
+    std::cout << data_load[0] << std::endl;
 }
 
 static inline bool exists_test(const std::string& name) {
@@ -137,9 +140,17 @@ int main(int argc, char const* argv[]){
         std::cout << "KNNG time: " << timer.elapsed() << " s.\n" << std::endl;
     }
 
+
+
     if(1 || !exists_test(p.output_path.c_str())) build_index(prep.data[0], prep.data.N, prep.data.dim, p);
     std::cout << "Indexing time: " << timer.elapsed() << " s.\n" << std::endl;
-    search(prep.data[0], prep.queries[0], prep.data.N, prep.queries.N, prep.data.dim, p);
+
+    // printf("Data head2: \n");
+    // std::cout << prep.data[1][2] << std::endl;
+
+    // std::cout << prep.data[0][0] << std::endl;
+    search(prep.data[0], prep.queries[0], prep.data.N, 100, prep.data.dim, p, prep);
+
     std::cout << "Searching time: " << timer.elapsed() << " s.\n" << std::endl;
     std::vector<int> efs = { 0,10,20,30,40,50,75,100,150,200,250,300,600,900,1200,1600,2000 };
     efs = { 100 };
