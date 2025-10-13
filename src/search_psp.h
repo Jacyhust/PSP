@@ -68,7 +68,7 @@ void read_kmeans(const std::string& filename, int query_count, std::vector<int>&
     }
 }
 
-void search(float*& data_load, float* query_load, unsigned points_num, unsigned query_num, unsigned dim, params p) {
+void search(float*& data_load, float* query_load, unsigned points_num, unsigned query_num, unsigned dim, params p, Preprocess& prep) {
     // if(argc < 8) {
     //     std::cout << "./run data_file query_file ssg_path L K result_path dim"
     //         << std::endl;
@@ -91,13 +91,17 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
 
     // assert(dim == query_dim);
 
+    // query_load = efanna2e::data_align(query_load, query_num, dim);
+
     efanna2e::IndexRandom init_index(dim, points_num);
     efanna2e::IndexMips index(dim, points_num, efanna2e::FAST_L2,
         (efanna2e::Index*)(&init_index));
 
     std::cerr << "SSG Path: " << p.output_path << std::endl;
     std::cerr << "Result Path: " << p.result_path << std::endl;
+    //std::cout << "data:" << data_load[0] << "," << data_load[1] << "," << data_load[2] << "," << data_load[3] << "," << data_load[4] << std::endl;
     index.SaveData(data_load);
+    //printf("Data loaded\n");
     index.Load(p.output_path.c_str());
 
     unsigned L = p.sL;
@@ -108,8 +112,7 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
 
     efanna2e::Parameters paras;
     paras.Set<unsigned>("L_search", L);
-    std::vector<std::vector<unsigned> > res(query_num);
-    for(unsigned i = 0; i < query_num; i++) res[i].resize(K);
+
 
     /* optional entry points initialization */
     // std::string filename = "../output/mnist/sn.bin";
@@ -121,13 +124,30 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
 
     std::vector<std::pair<float, float>> cal_pair;
 
+    int Qnum = 100;
+    int t = 160;
+
+    size_t cost1 = _G_COST;
+    int nq = t * Qnum;
+
+    std::vector<std::vector<unsigned> > res(nq);
+    for(unsigned i = 0; i < query_num; i++) res[i].resize(K);
+
+    std::vector<queryN> qs;
+    for(int j = 0; j < nq; j++) {
+        qs.emplace_back(j % Qnum, 1, 1, prep, 1);
+    }
 
     auto start = std::chrono::high_resolution_clock::now();
 
+
+    printf("Start searching %d queries with %d threads\n", nq, 160);
 #pragma omp parallel for
-    for(unsigned i = 0; i < (int)query_num; i++) {
-        // int dis_cal = index.Search_Mips_IP_Cal(query_load + i * dim, data_load, K, paras, res[i].data(), init_nodes_clusters[query_cluster[i]]);
-        int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + i * dim, data_load, K, paras, res[i].data());
+    for(unsigned i = 0; i < nq; i++) {
+        //std::cout << "searching " << cal_inner_product(qs[i].queryPoint, data_load + 0 * dim, dim) << " th query" << std::endl;
+        int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + (i % Qnum) * dim, data_load, K, paras, res[i].data());
+        // int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(qs[i].queryPoint, data_load, K, paras, res[i].data());
+        // for(auto& x : res[i]) qs[i].res.push_back(Res(x, cal_inner_product(qs[i].queryPoint, data_load + x * dim, dim)));
         num += dis_cal;
     }
 
@@ -135,6 +155,17 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
 
     std::cout << "Average Distance Computation: " << num / (int)query_num << std::endl;
     std::cout << "Average Query Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / static_cast<double>(query_num) << "ms" << std::endl;
+
+    Performance<queryN> perform;
+    for(int j = 0; j < nq; j++) {
+        perform.update(qs[j], prep);
+    }
+    float mean_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / static_cast<double>(query_num) / nq;
+    std::cout << "AVG QUERY TIME:    " << mean_time << "ms." << std::endl << std::endl;
+    std::cout << "AVG RECALL:        " << ((float)perform.NN_num) / (perform.num * res[0].size()) << std::endl;
+    std::cout << "AVG RATIO:         " << ((float)perform.ratio) / (perform.res_num) << std::endl;
+
+
     save_result(p.result_path.c_str(), res);
 
 }

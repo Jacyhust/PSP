@@ -7,7 +7,7 @@
 #include <mutex>
 #include <random>
 #include <vector>
-#include <windows.h>
+#include <mutex>
 #include "util.h"
 #include <mutex>
 #include "pthread.h"
