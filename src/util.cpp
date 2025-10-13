@@ -108,9 +108,15 @@ namespace efanna2e {
 #define DATA_ALIGN_FACTOR 1
 #endif
 #endif
-#endif
-    float* data_new = 0;
+    <<<<<< < HEAD
+
+      float* data_new = 0;
     unsigned new_dim =
+      ====== =
+#endif
+      float* data_new = 0;
+    unsigned new_dim =
+      >>>>>> > db731e9005cad6f9447e41b7ad7ef1b633836552
       (dim + DATA_ALIGN_FACTOR - 1) / DATA_ALIGN_FACTOR * DATA_ALIGN_FACTOR;
 #ifdef __APPLE__
     data_new = new float[(size_t)new_dim * (size_t)point_num];
@@ -135,5 +141,7 @@ namespace efanna2e {
 
     return data_new;
   }
-
+#else
+#define DATA_ALIGN_FACTOR 8
+#endif
 }

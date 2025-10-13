@@ -81,7 +81,7 @@ static inline bool exists_test(const std::string& name) {
 }
 
 int main(int argc, char const* argv[]){
-    std::string dataset = "gist";
+    std::string dataset = "audio2";
     int varied_n = 0;
     if(argc > 1) dataset = argv[1];
     if(argc > 2) varied_n = std::atoi(argv[2]);
