@@ -108,40 +108,34 @@ namespace efanna2e {
 #define DATA_ALIGN_FACTOR 1
 #endif
 #endif
-    <<<<<< < HEAD
 
       float* data_new = 0;
-    unsigned new_dim =
-      ====== =
-#endif
-      float* data_new = 0;
-    unsigned new_dim =
-      >>>>>> > db731e9005cad6f9447e41b7ad7ef1b633836552
-      (dim + DATA_ALIGN_FACTOR - 1) / DATA_ALIGN_FACTOR * DATA_ALIGN_FACTOR;
+      unsigned new_dim =
+          (dim + DATA_ALIGN_FACTOR - 1) / DATA_ALIGN_FACTOR * DATA_ALIGN_FACTOR;
 #ifdef __APPLE__
-    data_new = new float[(size_t)new_dim * (size_t)point_num];
+      data_new = new float[(size_t)new_dim * (size_t)point_num];
 #else
-    data_new =
-      (float*)memalign(DATA_ALIGN_FACTOR * 4,
-        (size_t)point_num * (size_t)new_dim * sizeof(float));
+      data_new =
+          (float*)memalign(DATA_ALIGN_FACTOR * 4,
+              (size_t)point_num * (size_t)new_dim * sizeof(float));
 #endif
 
-    for(size_t i = 0; i < point_num; i++) {
-      memcpy(data_new + i * new_dim, data_ori + i * dim, dim * sizeof(float));
-      memset(data_new + i * new_dim + dim, 0, (new_dim - dim) * sizeof(float));
-    }
+      for (size_t i = 0; i < point_num; i++) {
+          memcpy(data_new + i * new_dim, data_ori + i * dim, dim * sizeof(float));
+          memset(data_new + i * new_dim + dim, 0, (new_dim - dim) * sizeof(float));
+      }
 
-    dim = new_dim;
+      dim = new_dim;
 
 #ifdef __APPLE__
-    delete[] data_ori;
+      delete[] data_ori;
 #else
-    //free(data_ori);
+      //free(data_ori);
 #endif
-
-    return data_new;
+      return data_new;
+     
+#endif
+    return  data_ori;
   }
-#else
-#define DATA_ALIGN_FACTOR 8
-#endif
+
 }

@@ -11,23 +11,7 @@
 #include "util.h"
 #include <mutex>
 #include "pthread.h"
-CRITICAL_SECTION cs;
 
-void initializeCriticalSection() {
-    InitializeCriticalSection(&cs);
-}
-
-void deleteCriticalSection() {
-    DeleteCriticalSection(&cs);
-}
-
-void lockCriticalSection() {
-    EnterCriticalSection(&cs);
-}
-
-void unlockCriticalSection() {
-    LeaveCriticalSection(&cs);
-}
 namespace efanna2e {
 
 struct Neighbor {
