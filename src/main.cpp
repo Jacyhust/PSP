@@ -95,7 +95,7 @@ int main(int argc, char const* argv[]){
     int k = 50;
     int m, L, K;
 
-    std::cout << "Using FARGO for " << argvStr[1] << std::endl;
+    std::cout << "Using PSP for " << argvStr[1] << std::endl;
     Preprocess prep(data_fold1 + (argvStr[1]), data_fold2 + (argvStr[3]), varied_n);
     std::vector<resOutput> res;
     m = 1000;
@@ -130,6 +130,7 @@ int main(int argc, char const* argv[]){
         rnnd::RNNDescent index(prep.data, para);
         index.build(prep.data.N, 1);
         index.extract_index_graph(knngs);
+
         index.Save(p.nn_graph_path.c_str(), knngs);
         std::cout << "knng size=" << knngs.size() << std::endl;
         std::cout << "KNNG time: " << timer.elapsed() << " s.\n" << std::endl;
