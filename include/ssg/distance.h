@@ -1,6 +1,10 @@
 #pragma once
 
+
+#if defined(unix) || defined(__unix__)
 #include <x86intrin.h>
+#else
+#endif
 #include <iostream>
 namespace efanna2e {
   enum Metric { L2 = 0, INNER_PRODUCT = 1, FAST_L2 = 2, PQ = 3 };

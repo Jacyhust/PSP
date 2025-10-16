@@ -139,7 +139,7 @@ int main(int argc, char const* argv[]){
 
 
 
-    if(0 || !exists_test(p.output_path.c_str())) build_index(prep.data[0], prep.data.N, prep.data.dim, p);
+    if(1 || !exists_test(p.output_path.c_str())) build_index(prep.data[0], prep.data.N, prep.data.dim, p);
     std::cout << "Indexing time: " << timer.elapsed() << " s.\n" << std::endl;
 
     // printf("Data head2: \n");

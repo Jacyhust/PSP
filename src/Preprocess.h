@@ -86,7 +86,6 @@ class Preprocess
 			exit(-1);
 		}
 
-
 		unsigned int header[3] = {};
 		assert(sizeof header == 3 * 4);
 		in.read((char*)header, sizeof(header));
