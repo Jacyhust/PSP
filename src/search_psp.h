@@ -5,6 +5,7 @@
 #include "ssg/index_random.h"
 #include "mips/index_mips.h"
 #include "ssg/util.h"
+#include "alg.h"
 
 struct params{
     std::string nn_graph_path;
@@ -68,7 +69,7 @@ void read_kmeans(const std::string& filename, int query_count, std::vector<int>&
     }
 }
 
-void search(float*& data_load, float* query_load, unsigned points_num, unsigned query_num, unsigned dim, params p, Preprocess& prep) {
+std::vector<resOutput> search(float*& data_load, float* query_load, unsigned points_num, unsigned query_num, unsigned dim, params p, Preprocess& prep) {
     // if(argc < 8) {
     //     std::cout << "./run data_file query_file ssg_path L K result_path dim"
     //         << std::endl;
@@ -121,53 +122,68 @@ void search(float*& data_load, float* query_load, unsigned points_num, unsigned 
     // read_kmeans(filename, query_num, query_cluster, init_nodes_clusters, 100);
 
     // auto num = 0.0;
-    std::atomic<size_t> num = 0;
+
 
     std::vector<std::pair<float, float>> cal_pair;
 
     int Qnum = 100;
-    int t = 1;
+    int t = 160;
 
     size_t cost1 = _G_COST;
     int nq = t * Qnum;
 
-    std::vector<std::vector<unsigned> > res(nq);
-    for(unsigned i = 0; i < nq; i++) res[i].resize(K);
+    std::vector<int> efs = { 0,10,20,30,40,50,75,100,150,200,250,300,600,900,1200,1600,2000,4000,6000,8000,10000 };
+    std::vector<resOutput> resOut;
+    for(auto& ef : efs){
+        std::atomic<size_t> num = 0;
+        paras.Set<unsigned>("L_search", ef + K);
+        std::vector<std::vector<unsigned> > res(nq);
+        for(unsigned i = 0; i < nq; i++) res[i].resize(K);
+        std::vector<queryN> qs;
+        for(int j = 0; j < nq; j++) {
+            qs.emplace_back(j % Qnum, 1, K, prep, 1);
+        }
+        auto start = std::chrono::high_resolution_clock::now();
+        lsh::timer timer;
+        timer.restart();
+        printf("Start searching %d queries with %d threads\n", nq, 160);
+#pragma omp parallel for
+        for(unsigned i = 0; i < nq; i++) {
+            //std::cout << "searching " << cal_inner_product(qs[i].queryPoint, data_load + 0 * dim, dim) << " th query" << std::endl;
+            // int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + (i % Qnum) * dim, data_load, K, paras, res[i].data());
+            int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(qs[i].queryPoint, data_load, K, paras, res[i].data());
+            for(auto& x : res[i]) qs[i].res.push_back(Res(x, cal_inner_product(qs[i].queryPoint, data_load + x * dim, dim)));
+            num += dis_cal;
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        std::cout << "Average Distance Computation: " << num / (float)nq << std::endl;
+        std::cout << "Average Query Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms" << std::endl;
+        std::cout << "Average Query Time: " << timer.elapsed() << "ms" << std::endl;
+        Performance<queryN> perform;
+        for(int j = 0; j < nq; j++) {
+            perform.update(qs[j], prep);
+        }
+        float mean_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / (float)nq;
+        std::cout << "QPS:               " << 1000 / mean_time << std::endl << std::endl;
+        std::cout << "AVG RECALL:        " << ((float)perform.NN_num) / (perform.num * res[0].size()) << std::endl;
+        std::cout << "AVG RATIO:         " << ((float)perform.ratio) / (perform.res_num) << std::endl;
 
-    std::vector<queryN> qs;
-    for(int j = 0; j < nq; j++) {
-        qs.emplace_back(j % Qnum, 1, K, prep, 1);
+        resOutput res0;
+        res0.algName = "PSP";
+        res0.L = ef + K;
+        res0.K = K;
+        res0.c = 1;
+        res0.qps = 1000 / mean_time;
+        res0.time = mean_time / nq;
+        res0.recall = ((float)perform.NN_num) / (perform.num * res[0].size());
+        res0.ratio = ((float)perform.ratio) / (perform.res_num);
+
+        res0.cost = num / (float)nq;
+        resOut.push_back(res0);
     }
 
-    auto start = std::chrono::high_resolution_clock::now();
 
-    lsh::timer timer;
-    timer.restart();
-    printf("Start searching %d queries with %d threads\n", nq, 160);
-    // #pragma omp parallel for
-    for(unsigned i = 0; i < nq; i++) {
-        //std::cout << "searching " << cal_inner_product(qs[i].queryPoint, data_load + 0 * dim, dim) << " th query" << std::endl;
-        // int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(query_load + (i % Qnum) * dim, data_load, K, paras, res[i].data());
-        int dis_cal = index.Search_Mips_IP_Cal_with_No_SN(qs[i].queryPoint, data_load, K, paras, res[i].data());
-        for(auto& x : res[i]) qs[i].res.push_back(Res(x, cal_inner_product(qs[i].queryPoint, data_load + x * dim, dim)));
-        num += dis_cal;
-    }
-
-    auto end = std::chrono::high_resolution_clock::now();
-
-    std::cout << "Average Distance Computation: " << num / (float)nq << std::endl;
-    std::cout << "Average Query Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms" << std::endl;
-    std::cout << "Average Query Time: " << timer.elapsed() << "ms" << std::endl;
-    Performance<queryN> perform;
-    for(int j = 0; j < nq; j++) {
-        perform.update(qs[j], prep);
-    }
-    float mean_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / (float)nq;
-    std::cout << "QPS:               " << 1000 / mean_time << std::endl << std::endl;
-    std::cout << "AVG RECALL:        " << ((float)perform.NN_num) / (perform.num * res[0].size()) << std::endl;
-    std::cout << "AVG RATIO:         " << ((float)perform.ratio) / (perform.res_num) << std::endl;
-
-
-    save_result(p.result_path.c_str(), res);
+    return resOut;
+    //save_result(p.result_path.c_str(), res);
 
 }

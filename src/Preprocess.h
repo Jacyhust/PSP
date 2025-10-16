@@ -103,9 +103,7 @@ class Preprocess
 		queries.dim = data.dim;
 
 		std::cout << "Load from new file: " << file << "\n";
-		std::cout << "Nq =  " << queries.N << "\n";
-		std::cout << "N  =  " << data.N << "\n";
-		std::cout << "dim=  " << data.dim << "\n\n";
+
 
 		queries.val = new float* [queries.N];
 		data.val = new float* [data.N];
@@ -123,14 +121,24 @@ class Preprocess
 			in.read((char*)queries.val[i], sizeof(float) * header[2]);
 		}
 
+		int cnt = 0;
 		for(size_t i = 0; i < data.N; ++i) {
 			// data.val[i] = new float[data.dim + 1];
 			// in.read((char*)data.val[i], sizeof(float) * header[2]);
 			// data.val[i][data.dim - 1] = 0.0f;
+			data.val[cnt] = data.base + cnt * data.dim;
+			in.read((char*)data.val[cnt], sizeof(float) * header[2]);
 
-			data.val[i] = data.base + i * data.dim;
-			in.read((char*)data.val[i], sizeof(float) * header[2]);
+			float norm = sqrt(cal_inner_product(data.val[cnt], data.val[cnt], data.dim));
+			//if(norm > 1e-3)
+			cnt++;
+			//else printf("Zero data: %d,%d\n", i - cnt, i);
 		}
+
+		data.N = cnt;
+		std::cout << "Nq =  " << queries.N << "\n";
+		std::cout << "N  =  " << data.N << "\n";
+		std::cout << "dim=  " << data.dim << "\n\n";
 
 		std::cout << "Finish loading! " << "\n";
 

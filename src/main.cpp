@@ -89,7 +89,7 @@ int main(int argc, char const* argv[]){
     std::string argvStr[4];
     argvStr[1] = (dataset);
 
-    argvStr[3] = (dataset + ".bench_graph");
+    argvStr[3] = (dataset + ".bench_psp");
 
     float c = 0.9f;
     int k = 50;
@@ -97,7 +97,7 @@ int main(int argc, char const* argv[]){
 
     std::cout << "Using PSP for " << argvStr[1] << std::endl;
     Preprocess prep(data_fold1 + (argvStr[1]), data_fold2 + (argvStr[3]), varied_n);
-    std::vector<resOutput> res;
+
     m = 1000;
     L = 5;
     K = 12;
@@ -120,7 +120,8 @@ int main(int argc, char const* argv[]){
 
     if(varied_n > 0) dataset += std::to_string(varied_n);
 
-    if(1 || !exists_test(p.nn_graph_path.c_str())){
+    if(0 || !exists_test(p.nn_graph_path.c_str())){
+        std::cout << "Building KNNG graph: " << p.nn_graph_path << std::endl;
         rnnd::rnn_para para;
         para.S = 36;
         para.T1 = 2;
@@ -138,14 +139,14 @@ int main(int argc, char const* argv[]){
 
 
 
-    if(1 || !exists_test(p.output_path.c_str())) build_index(prep.data[0], prep.data.N, prep.data.dim, p);
+    if(0 || !exists_test(p.output_path.c_str())) build_index(prep.data[0], prep.data.N, prep.data.dim, p);
     std::cout << "Indexing time: " << timer.elapsed() << " s.\n" << std::endl;
 
     // printf("Data head2: \n");
     // std::cout << prep.data[1][2] << std::endl;
 
     // std::cout << prep.data[0][0] << std::endl;
-    search(prep.data[0], prep.queries[0], prep.data.N, 100, prep.data.dim, p, prep);
+    auto res = search(prep.data[0], prep.queries[0], prep.data.N, 100, prep.data.dim, p, prep);
 
     std::cout << "Searching time: " << timer.elapsed() << " s.\n" << std::endl;
     std::vector<int> efs = { 0,10,20,30,40,50,75,100,150,200,250,300,600,900,1200,1600,2000 };

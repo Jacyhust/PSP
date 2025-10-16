@@ -1,0 +1,2023 @@
+rm -rf fg ./build
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/alg.o src/alg.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/index.o src/index.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/index_mips.o src/index_mips.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/index_random.o src/index_random.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/main.o src/main.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/Preprocess.o src/Preprocess.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0 -c -o build/util.o src/util.cpp -I /home/xizhao/ANNS/PSP/include
+g++ -std=c++17 -mavx512f  -lrt -DNDEBUG  -DHAVE_CXX0X -openmp -march=native -fpic -w -fopenmp -ftree-vectorize -ftree-vectorizer-verbose=0  -o fg build/alg.o build/index.o build/index_mips.o build/index_random.o build/main.o build/Preprocess.o build/util.o
+Using PSP for audio
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/audio.data_new
+Nq =  200
+N  =  54187
+dim=  192
+
+Finish loading! 
+LOADING TIME: 0.043638s.
+
+LOADING BENMARK...
+LOADING TIME: 8.6e-05s.
+
+Rank Thred: 0.5, Count: 141, Recall: 0.0141, min_rank: 0.220459, max_rank: 0.999982, avg_rank: 0.92318
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 112.57 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/audio.knng
+knng size=54187
+KNNG time: 1.11005 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/audio.knng
+./indexes/audio.knng
+k=32
+num=54187
+Load nn graph
+Data head: 
+-0.006822
+-0.094504
+-0.143152
+-0.08283
+0.025644
+-0.006125
+52945
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Degree Statistics: Max = 40, Min = 8, Avg = 35
+Build Time: 2.20167
+Data head1: 
+-0.006822
+Indexing time: 3.40453 s.
+
+Dim=192, Size=54187
+Start searching 100 queries with 160 threads
+Average Distance Computation: 370.32
+Average Query Time: 20ms
+Average Query Time: 0.020715ms
+QPS:               5000
+
+AVG RECALL:        0.256
+AVG RATIO:         0.914329
+Start searching 100 queries with 160 threads
+Average Distance Computation: 622.79
+Average Query Time: 29ms
+Average Query Time: 0.029336ms
+QPS:               3448.28
+
+AVG RECALL:        0.368
+AVG RATIO:         0.941912
+Start searching 100 queries with 160 threads
+Average Distance Computation: 823.25
+Average Query Time: 38ms
+Average Query Time: 0.038379ms
+QPS:               2631.58
+
+AVG RECALL:        0.461
+AVG RATIO:         0.955214
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1011.03
+Average Query Time: 47ms
+Average Query Time: 0.04771ms
+QPS:               2127.66
+
+AVG RECALL:        0.529
+AVG RATIO:         0.963572
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1204.55
+Average Query Time: 57ms
+Average Query Time: 0.0578ms
+QPS:               1754.39
+
+AVG RECALL:        0.602
+AVG RATIO:         0.971643
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1393.15
+Average Query Time: 68ms
+Average Query Time: 0.068183ms
+QPS:               1470.59
+
+AVG RECALL:        0.656
+AVG RATIO:         0.976894
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1809.83
+Average Query Time: 92ms
+Average Query Time: 0.092253ms
+QPS:               1086.96
+
+AVG RECALL:        0.759
+AVG RATIO:         0.983691
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2234.06
+Average Query Time: 117ms
+Average Query Time: 0.117943ms
+QPS:               854.701
+
+AVG RECALL:        0.833
+AVG RATIO:         0.989535
+Start searching 100 queries with 160 threads
+Average Distance Computation: 3008.41
+Average Query Time: 212ms
+Average Query Time: 0.212216ms
+QPS:               471.698
+
+AVG RECALL:        0.914
+AVG RATIO:         0.995299
+Start searching 100 queries with 160 threads
+Average Distance Computation: 3743.03
+Average Query Time: 198ms
+Average Query Time: 0.198877ms
+QPS:               505.051
+
+AVG RECALL:        0.946
+AVG RATIO:         0.997144
+Start searching 100 queries with 160 threads
+Average Distance Computation: 4426.46
+Average Query Time: 244ms
+Average Query Time: 0.244602ms
+QPS:               409.836
+
+AVG RECALL:        0.966
+AVG RATIO:         0.998152
+Start searching 100 queries with 160 threads
+Average Distance Computation: 5072.79
+Average Query Time: 291ms
+Average Query Time: 0.291364ms
+QPS:               343.643
+
+AVG RECALL:        0.972
+AVG RATIO:         0.998391
+Start searching 100 queries with 160 threads
+Average Distance Computation: 8432.8
+Average Query Time: 593ms
+Average Query Time: 0.593985ms
+QPS:               168.634
+
+AVG RECALL:        0.996
+AVG RATIO:         0.999916
+Start searching 100 queries with 160 threads
+Average Distance Computation: 11206.2
+Average Query Time: 909ms
+Average Query Time: 0.90952ms
+QPS:               110.011
+
+AVG RECALL:        0.998
+AVG RATIO:         0.999952
+Start searching 100 queries with 160 threads
+Average Distance Computation: 13580
+Average Query Time: 1272ms
+Average Query Time: 1.27258ms
+QPS:               78.6163
+
+AVG RECALL:        1
+AVG RATIO:         1
+Start searching 100 queries with 160 threads
+Average Distance Computation: 16275.2
+Average Query Time: 1799ms
+Average Query Time: 1.79935ms
+QPS:               55.5864
+
+AVG RECALL:        1
+AVG RATIO:         1
+Start searching 100 queries with 160 threads
+Average Distance Computation: 18536.2
+Average Query Time: 2355ms
+Average Query Time: 2.35532ms
+QPS:               42.4628
+
+AVG RECALL:        1
+AVG RATIO:         1
+Searching time: 11.8327 s.
+
+*******************************************************************************************************
+The result of FARGO for audio is as follow: c=0.3, k=50
+*******************************************************************************************************
+     algName           c           L           K         QPS        Time      Recall       Ratio        Cost
+
+         PSP           1          10          10        5000       0.002       0.256    0.914329      370.32
+         PSP           1          20          10     3448.28      0.0029       0.368    0.941912      622.79
+         PSP           1          30          10     2631.58      0.0038       0.461    0.955214      823.25
+         PSP           1          40          10     2127.66      0.0047       0.529    0.963572     1011.03
+         PSP           1          50          10     1754.39      0.0057       0.602    0.971643     1204.55
+         PSP           1          60          10     1470.59      0.0068       0.656    0.976894     1393.15
+         PSP           1          85          10     1086.96      0.0092       0.759    0.983691     1809.83
+         PSP           1         110          10     854.701      0.0117       0.833    0.989535     2234.06
+         PSP           1         160          10     471.698      0.0212       0.914    0.995299     3008.41
+         PSP           1         210          10     505.051      0.0198       0.946    0.997144     3743.03
+         PSP           1         260          10     409.836      0.0244       0.966    0.998152     4426.46
+         PSP           1         310          10     343.643      0.0291       0.972    0.998391     5072.79
+         PSP           1         610          10     168.634      0.0593       0.996    0.999916      8432.8
+         PSP           1         910          10     110.011      0.0909       0.998    0.999952     11206.2
+         PSP           1        1210          10     78.6163      0.1272           1           1       13580
+         PSP           1        1610          10     55.5864      0.1799           1           1     16275.2
+         PSP           1        2010          10     42.4628      0.2355           1           1     18536.2
+
+******************************************************************************************************
+                                                                                    10-15 14:56
+*****************************************************************************************************
+
+
+Using PSP for mnist
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/mnist.data_new
+Nq =  200
+N  =  59800
+dim=  784
+
+Finish loading! 
+LOADING TIME: 0.190983s.
+
+LOADING BENMARK...
+LOADING TIME: 9.6e-05s.
+
+Rank Thred: 0.5, Count: 427, Recall: 0.0427, min_rank: 0.11699, max_rank: 0.999983, avg_rank: 0.908723
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 255.066 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/mnist.knng
+knng size=59800
+KNNG time: 1.26473 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/mnist.knng
+./indexes/mnist.knng
+k=32
+num=59800
+Load nn graph
+Data head: 
+0
+0
+0
+0
+0
+0
+10902
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Degree Statistics: Max = 40, Min = 11, Avg = 36
+Build Time: 8.76654
+Data head1: 
+0
+Indexing time: 10.219 s.
+
+Dim=784, Size=59800
+Start searching 100 queries with 160 threads
+Average Distance Computation: 464.65
+Average Query Time: 48ms
+Average Query Time: 0.048509ms
+QPS:               2083.33
+
+AVG RECALL:        0.228
+AVG RATIO:         0.955094
+Start searching 100 queries with 160 threads
+Average Distance Computation: 808.54
+Average Query Time: 83ms
+Average Query Time: 0.083592ms
+QPS:               1204.82
+
+AVG RECALL:        0.349
+AVG RATIO:         0.970896
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1059.79
+Average Query Time: 110ms
+Average Query Time: 0.110133ms
+QPS:               909.091
+
+AVG RECALL:        0.447
+AVG RATIO:         0.979079
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1317.07
+Average Query Time: 138ms
+Average Query Time: 0.138068ms
+QPS:               724.638
+
+AVG RECALL:        0.521
+AVG RATIO:         0.982867
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1589.97
+Average Query Time: 167ms
+Average Query Time: 0.167284ms
+QPS:               598.802
+
+AVG RECALL:        0.585
+AVG RATIO:         0.985737
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1838.53
+Average Query Time: 194ms
+Average Query Time: 0.194956ms
+QPS:               515.464
+
+AVG RECALL:        0.636
+AVG RATIO:         0.988271
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2428.51
+Average Query Time: 262ms
+Average Query Time: 0.262083ms
+QPS:               381.679
+
+AVG RECALL:        0.739
+AVG RATIO:         0.992246
+Start searching 100 queries with 160 threads
+Average Distance Computation: 3012.59
+Average Query Time: 327ms
+Average Query Time: 0.328018ms
+QPS:               305.81
+
+AVG RECALL:        0.815
+AVG RATIO:         0.995099
+Start searching 100 queries with 160 threads
+Average Distance Computation: 4105.18
+Average Query Time: 457ms
+Average Query Time: 0.457903ms
+QPS:               218.818
+
+AVG RECALL:        0.886
+AVG RATIO:         0.997445
+Start searching 100 queries with 160 threads
+Average Distance Computation: 5136.02
+Average Query Time: 585ms
+Average Query Time: 0.58553ms
+QPS:               170.94
+
+AVG RECALL:        0.925
+AVG RATIO:         0.998357
+Start searching 100 queries with 160 threads
+Average Distance Computation: 6096.44
+Average Query Time: 747ms
+Average Query Time: 0.747429ms
+QPS:               133.869
+
+AVG RECALL:        0.95
+AVG RATIO:         0.998886
+Start searching 100 queries with 160 threads
+Average Distance Computation: 7005.27
+Average Query Time: 832ms
+Average Query Time: 0.83234ms
+QPS:               120.192
+
+AVG RECALL:        0.97
+AVG RATIO:         0.999403
+Start searching 100 queries with 160 threads
+Average Distance Computation: 11617
+Average Query Time: 1526ms
+Average Query Time: 1.52687ms
+QPS:               65.5308
+
+AVG RECALL:        0.995
+AVG RATIO:         0.999919
+Start searching 100 queries with 160 threads
+Average Distance Computation: 15300.7
+Average Query Time: 2149ms
+Average Query Time: 2.14914ms
+QPS:               46.5333
+
+AVG RECALL:        0.998
+AVG RATIO:         0.999974
+Start searching 100 queries with 160 threads
+Average Distance Computation: 18356.7
+Average Query Time: 2860ms
+Average Query Time: 2.86093ms
+QPS:               34.965
+
+AVG RECALL:        0.999
+AVG RATIO:         0.999995
+Start searching 100 queries with 160 threads
+Average Distance Computation: 21779.5
+Average Query Time: 3609ms
+Average Query Time: 3.6092ms
+QPS:               27.7085
+
+AVG RECALL:        1
+AVG RATIO:         1
+Start searching 100 queries with 160 threads
+Average Distance Computation: 24656.5
+Average Query Time: 4424ms
+Average Query Time: 4.42442ms
+QPS:               22.604
+
+AVG RECALL:        1
+AVG RATIO:         1
+Searching time: 28.9039 s.
+
+*******************************************************************************************************
+The result of FARGO for mnist is as follow: c=0.3, k=50
+*******************************************************************************************************
+     algName           c           L           K         QPS        Time      Recall       Ratio        Cost
+
+         PSP           1          10          10     2083.33      0.0048       0.228    0.955094      464.65
+         PSP           1          20          10     1204.82      0.0083       0.349    0.970896      808.54
+         PSP           1          30          10     909.091       0.011       0.447    0.979079     1059.79
+         PSP           1          40          10     724.638      0.0138       0.521    0.982867     1317.07
+         PSP           1          50          10     598.802      0.0167       0.585    0.985737     1589.97
+         PSP           1          60          10     515.464      0.0194       0.636    0.988271     1838.53
+         PSP           1          85          10     381.679      0.0262       0.739    0.992246     2428.51
+         PSP           1         110          10      305.81      0.0327       0.815    0.995099     3012.59
+         PSP           1         160          10     218.818      0.0457       0.886    0.997445     4105.18
+         PSP           1         210          10      170.94      0.0585       0.925    0.998357     5136.02
+         PSP           1         260          10     133.869      0.0747        0.95    0.998886     6096.44
+         PSP           1         310          10     120.192      0.0832        0.97    0.999403     7005.27
+         PSP           1         610          10     65.5308      0.1526       0.995    0.999919       11617
+         PSP           1         910          10     46.5333      0.2149       0.998    0.999974     15300.7
+         PSP           1        1210          10      34.965       0.286       0.999    0.999995     18356.7
+         PSP           1        1610          10     27.7085      0.3609           1           1     21779.5
+         PSP           1        2010          10      22.604      0.4424           1           1     24656.5
+
+******************************************************************************************************
+                                                                                    10-15 14:57
+*****************************************************************************************************
+
+
+Using PSP for yahoo_large
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/yahoo_large.data_new
+Nq =  200
+N  =  624760
+dim=  300
+
+Finish loading! 
+LOADING TIME: 0.778828s.
+
+MAKING BENMARK...
+
+0%   10   20   30   40   50   60   70   80   90   100%
+|----|----|----|----|----|----|----|----|----|----|
+***************************************************
+MAKING TIME: 5.11622s.
+
+SAVING BENMARK...
+SAVING TIME: 0.000263s.
+
+Rank Thred: 0.5, Count: 0, Recall: 0, min_rank: 0.785881, max_rank: 0.999998, avg_rank: 0.978399
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 1761.84 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/yahoo_large.knng
+knng size=624760
+KNNG time: 11.8135 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/yahoo_large.knng
+./indexes/yahoo_large.knng
+k=32
+num=624760
+Load nn graph
+Data head: 
+-4.26272e-05
+-0.000202223
+-5.20856e-06
+-1.11692e-05
+-4.84723e-05
+-0.00018803
+6469
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Degree Statistics: Max = 41, Min = 7, Avg = 38
+Build Time: 116.469
+Data head1: 
+-4.26272e-05
+Indexing time: 130.03 s.
+
+Dim=300, Size=624760
+Start searching 100 queries with 160 threads
+Average Distance Computation: 514.11
+Average Query Time: 60ms
+Average Query Time: 0.060521ms
+QPS:               1666.67
+
+AVG RECALL:        0.005
+AVG RATIO:         0.129641
+Start searching 100 queries with 160 threads
+Average Distance Computation: 943.32
+Average Query Time: 107ms
+Average Query Time: 0.107843ms
+QPS:               934.579
+
+AVG RECALL:        0.014
+AVG RATIO:         0.196983
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1371.36
+Average Query Time: 156ms
+Average Query Time: 0.156642ms
+QPS:               641.026
+
+AVG RECALL:        0.032
+AVG RATIO:         0.260085
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1730.28
+Average Query Time: 197ms
+Average Query Time: 0.197146ms
+QPS:               507.614
+
+AVG RECALL:        0.028
+AVG RATIO:         0.269911
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2122.22
+Average Query Time: 241ms
+Average Query Time: 0.24166ms
+QPS:               414.938
+
+AVG RECALL:        0.036
+AVG RATIO:         0.307791
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2463.55
+Average Query Time: 281ms
+Average Query Time: 0.281218ms
+QPS:               355.872
+
+AVG RECALL:        0.055
+AVG RATIO:         0.335413
+Start searching 100 queries with 160 threads
+Average Distance Computation: 3374.02
+Average Query Time: 387ms
+Average Query Time: 0.387327ms
+QPS:               258.398
+
+AVG RECALL:        0.083
+AVG RATIO:         0.405912
+Start searching 100 queries with 160 threads
+Average Distance Computation: 4326.35
+Average Query Time: 499ms
+Average Query Time: 0.499147ms
+QPS:               200.401
+
+AVG RECALL:        0.09
+AVG RATIO:         0.425425
+Start searching 100 queries with 160 threads
+Average Distance Computation: 6147.95
+Average Query Time: 715ms
+Average Query Time: 0.715911ms
+QPS:               139.86
+
+AVG RECALL:        0.118
+AVG RATIO:         0.494739
+Start searching 100 queries with 160 threads
+Average Distance Computation: 7682.54
+Average Query Time: 905ms
+Average Query Time: 0.905343ms
+QPS:               110.497
+
+AVG RECALL:        0.146
+AVG RATIO:         0.549426
+Start searching 100 queries with 160 threads
+Average Distance Computation: 9331.29
+Average Query Time: 1112ms
+Average Query Time: 1.1122ms
+QPS:               89.9281
+
+AVG RECALL:        0.167
+AVG RATIO:         0.575885
+Start searching 100 queries with 160 threads
+Average Distance Computation: 10774.8
+Average Query Time: 1297ms
+Average Query Time: 1.2977ms
+QPS:               77.101
+
+AVG RECALL:        0.196
+AVG RATIO:         0.609216
+Start searching 100 queries with 160 threads
+Average Distance Computation: 19743.2
+Average Query Time: 2525ms
+Average Query Time: 2.52556ms
+QPS:               39.604
+
+AVG RECALL:        0.333
+AVG RATIO:         0.726259
+Start searching 100 queries with 160 threads
+Average Distance Computation: 28042.4
+Average Query Time: 3787ms
+Average Query Time: 3.78735ms
+QPS:               26.4061
+
+AVG RECALL:        0.432
+AVG RATIO:         0.792628
+Start searching 100 queries with 160 threads
+Average Distance Computation: 35966.1
+Average Query Time: 5107ms
+Average Query Time: 5.10739ms
+QPS:               19.581
+
+AVG RECALL:        0.525
+AVG RATIO:         0.840989
+Start searching 100 queries with 160 threads
+Average Distance Computation: 46032.1
+Average Query Time: 6980ms
+Average Query Time: 6.98065ms
+QPS:               14.3266
+
+AVG RECALL:        0.622
+AVG RATIO:         0.880988
+Start searching 100 queries with 160 threads
+Average Distance Computation: 55377
+Average Query Time: 8921ms
+Average Query Time: 8.92182ms
+QPS:               11.2095
+
+AVG RECALL:        0.695
+AVG RATIO:         0.908931
+Searching time: 164.26 s.
+
+*******************************************************************************************************
+The result of FARGO for yahoo_large is as follow: c=0.3, k=50
+*******************************************************************************************************
+     algName           c           L           K         QPS        Time      Recall       Ratio        Cost
+
+         PSP           1          10          10     1666.67       0.006       0.005    0.129641      514.11
+         PSP           1          20          10     934.579      0.0107       0.014    0.196983      943.32
+         PSP           1          30          10     641.026      0.0156       0.032    0.260085     1371.36
+         PSP           1          40          10     507.614      0.0197       0.028    0.269911     1730.28
+         PSP           1          50          10     414.938      0.0241       0.036    0.307791     2122.22
+         PSP           1          60          10     355.872      0.0281       0.055    0.335413     2463.55
+         PSP           1          85          10     258.398      0.0387       0.083    0.405912     3374.02
+         PSP           1         110          10     200.401      0.0499        0.09    0.425425     4326.35
+         PSP           1         160          10      139.86      0.0715       0.118    0.494739     6147.95
+         PSP           1         210          10     110.497      0.0905       0.146    0.549426     7682.54
+         PSP           1         260          10     89.9281      0.1112       0.167    0.575885     9331.29
+         PSP           1         310          10      77.101      0.1297       0.196    0.609216     10774.8
+         PSP           1         610          10      39.604      0.2525       0.333    0.726259     19743.2
+         PSP           1         910          10     26.4061      0.3787       0.432    0.792628     28042.4
+         PSP           1        1210          10      19.581      0.5107       0.525    0.840989     35966.1
+         PSP           1        1610          10     14.3266       0.698       0.622    0.880988     46032.1
+         PSP           1        2010          10     11.2095      0.8921       0.695    0.908931       55377
+
+******************************************************************************************************
+                                                                                    10-15 15:0
+*****************************************************************************************************
+
+
+Using PSP for gist
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/gist.data_new
+Zero data: 0,6830
+Zero data: 1,113518
+Zero data: 2,141276
+Zero data: 3,184772
+Zero data: 4,191925
+Zero data: 5,224597
+Zero data: 6,244763
+Zero data: 7,244766
+Zero data: 8,618275
+Zero data: 9,620073
+Nq =  200
+N  =  999790
+dim=  960
+
+Finish loading! 
+LOADING TIME: 3.92401s.
+
+LOADING BENMARK...
+LOADING TIME: 9e-05s.
+
+Rank Thred: 0.5, Count: 0, Recall: 0, min_rank: 0.990559, max_rank: 0.999999, avg_rank: 0.999912
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 5334.38 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/gist.knng
+knng size=999790
+KNNG time: 20.8036 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/gist.knng
+./indexes/gist.knng
+k=32
+num=999790
+Load nn graph
+Data head: 
+0.0429
+0.0577
+0.0631
+0.08
+0.0851
+0.1472
+681041
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Using PSP for tiny5m
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/tiny5m.data_new
+Zero data: 0,7493
+Zero data: 1,16325
+Zero data: 2,19520
+Zero data: 3,20567
+Zero data: 4,26620
+Zero data: 5,52609
+Zero data: 6,53266
+Zero data: 7,65674
+Zero data: 8,65732
+Zero data: 9,65958
+Zero data: 10,65995
+Zero data: 11,71042
+Zero data: 12,71043
+Zero data: 13,82008
+Zero data: 14,111504
+Zero data: 15,121604
+Zero data: 16,122587
+Zero data: 17,137362
+Zero data: 18,154354
+Zero data: 19,173459
+Zero data: 20,175050
+Zero data: 21,178343
+Zero data: 22,189500
+Zero data: 23,189708
+Zero data: 24,190010
+Zero data: 25,208542
+Zero data: 26,216208
+Zero data: 27,249091
+Zero data: 28,250338
+Zero data: 29,281630
+Zero data: 30,286398
+Zero data: 31,287712
+Zero data: 32,291456
+Zero data: 33,310809
+Zero data: 34,313747
+Zero data: 35,314650
+Zero data: 36,317562
+Zero data: 37,336592
+Zero data: 38,336595
+Zero data: 39,338394
+Zero data: 40,338506
+Zero data: 41,338555
+Zero data: 42,338556
+Zero data: 43,338567
+Zero data: 44,338602
+Zero data: 45,338724
+Zero data: 46,338995
+Zero data: 47,339178
+Zero data: 48,339179
+Zero data: 49,339219
+Zero data: 50,339225
+Zero data: 51,339283
+Zero data: 52,339323
+Zero data: 53,339394
+Zero data: 54,339395
+Zero data: 55,339398
+Zero data: 56,339521
+Zero data: 57,339541
+Zero data: 58,339546
+Zero data: 59,339547
+Zero data: 60,339548
+Zero data: 61,339549
+Zero data: 62,341164
+Zero data: 63,345692
+Zero data: 64,345928
+Zero data: 65,345932
+Zero data: 66,346171
+Zero data: 67,348764
+Zero data: 68,349280
+Zero data: 69,349324
+Zero data: 70,349466
+Zero data: 71,349633
+Zero data: 72,351235
+Zero data: 73,351238
+Zero data: 74,353480
+Zero data: 75,367791
+Zero data: 76,368035
+Zero data: 77,368037
+Zero data: 78,369348
+Zero data: 79,371997
+Zero data: 80,372436
+Zero data: 81,372480
+Zero data: 82,373717
+Zero data: 83,373750
+Zero data: 84,373751
+Zero data: 85,373771
+Zero data: 86,373772
+Zero data: 87,373776
+Zero data: 88,373815
+Zero data: 89,375938
+Zero data: 90,376183
+Zero data: 91,376342
+Zero data: 92,376343
+Zero data: 93,376388
+Zero data: 94,377336
+Zero data: 95,405550
+Zero data: 96,405596
+Zero data: 97,405626
+Zero data: 98,405800
+Zero data: 99,406693
+Zero data: 100,410269
+Zero data: 101,411401
+Zero data: 102,413101
+Zero data: 103,423371
+Zero data: 104,423372
+Zero data: 105,423808
+Zero data: 106,423891
+Zero data: 107,424884
+Zero data: 108,430083
+Zero data: 109,434830
+Zero data: 110,436128
+Zero data: 111,440163
+Zero data: 112,440312
+Zero data: 113,440354
+Zero data: 114,440399
+Zero data: 115,440413
+Zero data: 116,452287
+Zero data: 117,452753
+Zero data: 118,452792
+Zero data: 119,455874
+Zero data: 120,462082
+Zero data: 121,467490
+Zero data: 122,467701
+Zero data: 123,477841
+Zero data: 124,487699
+Zero data: 125,489311
+Zero data: 126,492200
+Zero data: 127,492248
+Zero data: 128,492303
+Zero data: 129,492335
+Zero data: 130,499007
+Zero data: 131,499237
+Zero data: 132,499277
+Zero data: 133,499636
+Zero data: 134,499638
+Zero data: 135,499726
+Zero data: 136,499824
+Zero data: 137,500031
+Zero data: 138,500901
+Zero data: 139,501352
+Zero data: 140,501498
+Zero data: 141,501737
+Zero data: 142,501794
+Zero data: 143,501864
+Zero data: 144,502078
+Zero data: 145,502256
+Zero data: 146,502419
+Zero data: 147,502475
+Zero data: 148,502481
+Zero data: 149,502497
+Zero data: 150,502498
+Zero data: 151,502536
+Zero data: 152,502537
+Zero data: 153,502733
+Zero data: 154,502816
+Zero data: 155,502966
+Zero data: 156,502979
+Zero data: 157,503008
+Zero data: 158,503015
+Zero data: 159,503024
+Zero data: 160,503051
+Zero data: 161,503082
+Zero data: 162,503104
+Zero data: 163,503106
+Zero data: 164,503111
+Zero data: 165,503112
+Zero data: 166,503127
+Zero data: 167,515038
+Zero data: 168,532699
+Zero data: 169,536727
+Zero data: 170,550685
+Zero data: 171,551034
+Zero data: 172,561675
+Zero data: 173,561676
+Zero data: 174,561760
+Zero data: 175,561774
+Zero data: 176,561796
+Zero data: 177,561798
+Zero data: 178,561844
+Zero data: 179,561853
+Zero data: 180,561884
+Zero data: 181,569134
+Zero data: 182,569516
+Zero data: 183,569699
+Zero data: 184,569709
+Zero data: 185,569712
+Zero data: 186,569713
+Zero data: 187,569719
+Zero data: 188,569734
+Zero data: 189,569758
+Zero data: 190,569764
+Zero data: 191,569769
+Zero data: 192,569781
+Zero data: 193,569783
+Zero data: 194,585935
+Zero data: 195,585940
+Zero data: 196,585941
+Zero data: 197,586904
+Zero data: 198,587035
+Zero data: 199,587086
+Zero data: 200,587094
+Zero data: 201,587095
+Zero data: 202,587134
+Zero data: 203,589500
+Zero data: 204,590636
+Zero data: 205,591308
+Zero data: 206,591310
+Zero data: 207,591311
+Zero data: 208,591697
+Zero data: 209,591959
+Zero data: 210,592355
+Zero data: 211,603319
+Zero data: 212,603320
+Zero data: 213,604602
+Zero data: 214,608442
+Zero data: 215,608443
+Zero data: 216,608484
+Zero data: 217,608500
+Zero data: 218,612133
+Zero data: 219,612179
+Zero data: 220,612180
+Zero data: 221,612267
+Zero data: 222,612291
+Zero data: 223,612294
+Zero data: 224,612793
+Zero data: 225,613638
+Zero data: 226,615144
+Zero data: 227,642951
+Zero data: 228,646072
+Zero data: 229,682151
+Zero data: 230,685080
+Zero data: 231,690210
+Zero data: 232,691303
+Zero data: 233,695861
+Zero data: 234,696496
+Zero data: 235,699558
+Zero data: 236,701952
+Zero data: 237,702684
+Zero data: 238,709835
+Zero data: 239,717461
+Zero data: 240,717462
+Zero data: 241,717800
+Zero data: 242,718233
+Zero data: 243,720016
+Zero data: 244,735599
+Zero data: 245,745859
+Zero data: 246,747359
+Zero data: 247,748005
+Zero data: 248,748587
+Zero data: 249,748588
+Zero data: 250,748824
+Zero data: 251,748831
+Zero data: 252,748912
+Zero data: 253,748948
+Zero data: 254,749068
+Zero data: 255,749154
+Zero data: 256,759685
+Zero data: 257,800190
+Zero data: 258,800657
+Zero data: 259,806834
+Zero data: 260,808290
+Zero data: 261,818841
+Zero data: 262,822203
+Zero data: 263,822349
+Zero data: 264,822429
+Zero data: 265,822501
+Zero data: 266,824975
+Zero data: 267,826041
+Zero data: 268,844509
+Zero data: 269,844581
+Zero data: 270,846464
+Zero data: 271,846465
+Zero data: 272,848850
+Zero data: 273,865852
+Zero data: 274,865882
+Zero data: 275,873641
+Zero data: 276,873642
+Zero data: 277,878763
+Zero data: 278,880048
+Zero data: 279,893916
+Zero data: 280,922621
+Zero data: 281,922644
+Zero data: 282,922667
+Zero data: 283,922668
+Zero data: 284,922669
+Zero data: 285,945910
+Zero data: 286,947527
+Zero data: 287,964798
+Zero data: 288,974891
+Zero data: 289,982406
+Zero data: 290,1014689
+Zero data: 291,1037581
+Zero data: 292,1053766
+Zero data: 293,1092270
+Zero data: 294,1094512
+Zero data: 295,1145059
+Zero data: 296,1178697
+Zero data: 297,1199981
+Zero data: 298,1220414
+Zero data: 299,1232825
+Zero data: 300,1241488
+Zero data: 301,1245618
+Zero data: 302,1262964
+Zero data: 303,1269736
+Zero data: 304,1271255
+Zero data: 305,1284674
+Zero data: 306,1292000
+Zero data: 307,1384698
+Zero data: 308,1389728
+Zero data: 309,1402614
+Zero data: 310,1412599
+Zero data: 311,1418782
+Zero data: 312,1418970
+Zero data: 313,1419165
+Zero data: 314,1419406
+Zero data: 315,1419426
+Zero data: 316,1419681
+Zero data: 317,1419684
+Zero data: 318,1420379
+Zero data: 319,1426198
+Zero data: 320,1426472
+Zero data: 321,1426473
+Zero data: 322,1427058
+Zero data: 323,1427475
+Zero data: 324,1427538
+Zero data: 325,1427539
+Zero data: 326,1427749
+Zero data: 327,1427812
+Zero data: 328,1427841
+Zero data: 329,1427907
+Zero data: 330,1428028
+Zero data: 331,1428186
+Zero data: 332,1428203
+Zero data: 333,1428539
+Zero data: 334,1428589
+Zero data: 335,1428604
+Zero data: 336,1428697
+Zero data: 337,1428703
+Zero data: 338,1428704
+Zero data: 339,1429071
+Zero data: 340,1430039
+Zero data: 341,1431679
+Zero data: 342,1434726
+Zero data: 343,1502102
+Zero data: 344,1502813
+Zero data: 345,1514035
+Zero data: 346,1516854
+Zero data: 347,1516856
+Zero data: 348,1547143
+Zero data: 349,1573340
+Zero data: 350,1582906
+Zero data: 351,1583030
+Zero data: 352,1583031
+Zero data: 353,1583047
+Zero data: 354,1583048
+Zero data: 355,1583049
+Zero data: 356,1583050
+Zero data: 357,1583051
+Zero data: 358,1583053
+Zero data: 359,1583054
+Zero data: 360,1583058
+Zero data: 361,1583059
+Zero data: 362,1597123
+Zero data: 363,1597490
+Zero data: 364,1598824
+Zero data: 365,1600414
+Zero data: 366,1602945
+Zero data: 367,1604573
+Zero data: 368,1604655
+Zero data: 369,1606063
+Zero data: 370,1606693
+Zero data: 371,1606862
+Zero data: 372,1606870
+Zero data: 373,1607018
+Zero data: 374,1607263
+Zero data: 375,1607331
+Zero data: 376,1607409
+Zero data: 377,1607414
+Zero data: 378,1607485
+Zero data: 379,1607668
+Zero data: 380,1607669
+Zero data: 381,1607672
+Zero data: 382,1607951
+Zero data: 383,1608011
+Zero data: 384,1608096
+Zero data: 385,1610159
+Zero data: 386,1610161
+Zero data: 387,1610222
+Zero data: 388,1610288
+Zero data: 389,1610289
+Zero data: 390,1614625
+Zero data: 391,1614663
+Zero data: 392,1614719
+Zero data: 393,1614720
+Zero data: 394,1614878
+Zero data: 395,1615015
+Zero data: 396,1615124
+Zero data: 397,1615170
+Zero data: 398,1615174
+Zero data: 399,1615481
+Zero data: 400,1615742
+Zero data: 401,1615857
+Zero data: 402,1615882
+Zero data: 403,1615895
+Zero data: 404,1615902
+Zero data: 405,1616026
+Zero data: 406,1616086
+Zero data: 407,1616090
+Zero data: 408,1616091
+Zero data: 409,1616092
+Zero data: 410,1616126
+Zero data: 411,1616127
+Zero data: 412,1616249
+Zero data: 413,1616253
+Zero data: 414,1616255
+Zero data: 415,1616305
+Zero data: 416,1616395
+Zero data: 417,1617191
+Zero data: 418,1617192
+Zero data: 419,1617197
+Zero data: 420,1617198
+Zero data: 421,1617262
+Zero data: 422,1617313
+Zero data: 423,1617458
+Zero data: 424,1617507
+Zero data: 425,1617589
+Zero data: 426,1622888
+Zero data: 427,1626942
+Zero data: 428,1634816
+Zero data: 429,1646933
+Zero data: 430,1648250
+Zero data: 431,1648281
+Zero data: 432,1690055
+Zero data: 433,1690056
+Zero data: 434,1691245
+Zero data: 435,1708518
+Zero data: 436,1708869
+Zero data: 437,1708966
+Zero data: 438,1709132
+Zero data: 439,1709331
+Zero data: 440,1709554
+Zero data: 441,1709681
+Zero data: 442,1709723
+Zero data: 443,1713680
+Zero data: 444,1721669
+Zero data: 445,1728937
+Zero data: 446,1731045
+Zero data: 447,1761986
+Zero data: 448,1762104
+Zero data: 449,1762378
+Zero data: 450,1764266
+Zero data: 451,1764267
+Zero data: 452,1764298
+Zero data: 453,1764307
+Zero data: 454,1764308
+Zero data: 455,1764333
+Zero data: 456,1764336
+Zero data: 457,1764337
+Zero data: 458,1773789
+Zero data: 459,1776171
+Zero data: 460,1785405
+Zero data: 461,1785892
+Zero data: 462,1786517
+Zero data: 463,1798983
+Zero data: 464,1811529
+Zero data: 465,1817846
+Zero data: 466,1818274
+Zero data: 467,1818302
+Zero data: 468,1833221
+Zero data: 469,1836427
+Zero data: 470,1837988
+Zero data: 471,1845599
+Zero data: 472,1852059
+Zero data: 473,1854024
+Zero data: 474,1856923
+Zero data: 475,1879379
+Zero data: 476,1879432
+Zero data: 477,1879989
+Zero data: 478,1879990
+Zero data: 479,1880015
+Zero data: 480,1883398
+Zero data: 481,1888364
+Zero data: 482,1889577
+Zero data: 483,1889578
+Zero data: 484,1936071
+Zero data: 485,1936508
+Zero data: 486,1936517
+Zero data: 487,1946394
+Zero data: 488,1956509
+Zero data: 489,1956512
+Zero data: 490,1967560
+Zero data: 491,1967561
+Zero data: 492,1983238
+Zero data: 493,1983248
+Zero data: 494,1987368
+Zero data: 495,2020526
+Zero data: 496,2027177
+Zero data: 497,2029646
+Zero data: 498,2036615
+Zero data: 499,2046087
+Zero data: 500,2056447
+Zero data: 501,2077020
+Zero data: 502,2078646
+Zero data: 503,2078647
+Zero data: 504,2078776
+Zero data: 505,2078781
+Zero data: 506,2078809
+Zero data: 507,2078849
+Zero data: 508,2078852
+Zero data: 509,2079862
+Zero data: 510,2080105
+Zero data: 511,2080226
+Zero data: 512,2080301
+Zero data: 513,2080674
+Zero data: 514,2083765
+Zero data: 515,2086348
+Zero data: 516,2086349
+Zero data: 517,2090040
+Zero data: 518,2090043
+Zero data: 519,2090052
+Zero data: 520,2090300
+Zero data: 521,2090397
+Zero data: 522,2090398
+Zero data: 523,2090399
+Zero data: 524,2090400
+Zero data: 525,2090402
+Zero data: 526,2092286
+Zero data: 527,2100035
+Zero data: 528,2100091
+Zero data: 529,2113767
+Zero data: 530,2113939
+Zero data: 531,2113940
+Zero data: 532,2114096
+Zero data: 533,2114165
+Zero data: 534,2114170
+Zero data: 535,2114220
+Zero data: 536,2114234
+Zero data: 537,2116239
+Zero data: 538,2120482
+Zero data: 539,2124689
+Zero data: 540,2145442
+Zero data: 541,2146154
+Zero data: 542,2146757
+Zero data: 543,2152222
+Zero data: 544,2152223
+Zero data: 545,2153187
+Zero data: 546,2160906
+Zero data: 547,2170601
+Zero data: 548,2170646
+Zero data: 549,2170652
+Zero data: 550,2171025
+Zero data: 551,2174457
+Zero data: 552,2175479
+Zero data: 553,2175935
+Zero data: 554,2176652
+Zero data: 555,2178259
+Zero data: 556,2189020
+Zero data: 557,2192620
+Zero data: 558,2201078
+Zero data: 559,2201866
+Zero data: 560,2202786
+Zero data: 561,2203921
+Zero data: 562,2205103
+Zero data: 563,2215005
+Zero data: 564,2215271
+Zero data: 565,2215747
+Zero data: 566,2217034
+Zero data: 567,2219043
+Zero data: 568,2219265
+Zero data: 569,2226478
+Zero data: 570,2226479
+Zero data: 571,2232202
+Zero data: 572,2238051
+Zero data: 573,2243261
+Zero data: 574,2243984
+Zero data: 575,2243985
+Zero data: 576,2244515
+Zero data: 577,2244707
+Zero data: 578,2244962
+Zero data: 579,2245165
+Zero data: 580,2245300
+Zero data: 581,2246090
+Zero data: 582,2257247
+Zero data: 583,2259870
+Zero data: 584,2260181
+Zero data: 585,2262261
+Zero data: 586,2265374
+Zero data: 587,2265378
+Zero data: 588,2275171
+Zero data: 589,2278886
+Zero data: 590,2287878
+Zero data: 591,2295918
+Zero data: 592,2304439
+Zero data: 593,2304448
+Zero data: 594,2312414
+Zero data: 595,2314758
+Zero data: 596,2335077
+Zero data: 597,2335178
+Zero data: 598,2342875
+Zero data: 599,2352818
+Zero data: 600,2352819
+Zero data: 601,2360245
+Zero data: 602,2366244
+Zero data: 603,2366248
+Zero data: 604,2368388
+Zero data: 605,2378187
+Zero data: 606,2399664
+Zero data: 607,2402326
+Zero data: 608,2403496
+Zero data: 609,2431254
+Zero data: 610,2465263
+Zero data: 611,2480519
+Zero data: 612,2480617
+Zero data: 613,2483349
+Zero data: 614,2483742
+Zero data: 615,2485492
+Zero data: 616,2485720
+Zero data: 617,2487562
+Zero data: 618,2490433
+Zero data: 619,2491402
+Zero data: 620,2491403
+Zero data: 621,2491537
+Zero data: 622,2526735
+Zero data: 623,2532082
+Zero data: 624,2532251
+Zero data: 625,2532454
+Zero data: 626,2532456
+Zero data: 627,2532457
+Zero data: 628,2532575
+Zero data: 629,2532685
+Zero data: 630,2532743
+Zero data: 631,2540510
+Zero data: 632,2540583
+Zero data: 633,2540586
+Zero data: 634,2540753
+Zero data: 635,2540906
+Zero data: 636,2541301
+Zero data: 637,2541304
+Zero data: 638,2541361
+Zero data: 639,2541363
+Zero data: 640,2541367
+Zero data: 641,2541439
+Zero data: 642,2541442
+Zero data: 643,2541445
+Zero data: 644,2541494
+Zero data: 645,2541505
+Zero data: 646,2541564
+Zero data: 647,2541587
+Zero data: 648,2541622
+Zero data: 649,2541624
+Zero data: 650,2541628
+Zero data: 651,2541629
+Zero data: 652,2541676
+Zero data: 653,2541688
+Zero data: 654,2541731
+Zero data: 655,2541735
+Zero data: 656,2541742
+Zero data: 657,2541743
+Zero data: 658,2542724
+Zero data: 659,2543306
+Zero data: 660,2543384
+Zero data: 661,2543561
+Zero data: 662,2548085
+Zero data: 663,2548664
+Zero data: 664,2548665
+Zero data: 665,2551976
+Zero data: 666,2564446
+Zero data: 667,2564447
+Zero data: 668,2564448
+Zero data: 669,2564449
+Zero data: 670,2570808
+Zero data: 671,2576709
+Zero data: 672,2582153
+Zero data: 673,2582247
+Zero data: 674,2587649
+Zero data: 675,2587784
+Zero data: 676,2588585
+Zero data: 677,2588761
+Zero data: 678,2588777
+Zero data: 679,2588800
+Zero data: 680,2588803
+Zero data: 681,2594919
+Zero data: 682,2594924
+Zero data: 683,2597377
+Zero data: 684,2600227
+Zero data: 685,2609385
+Zero data: 686,2613178
+Zero data: 687,2616692
+Zero data: 688,2629741
+Zero data: 689,2629742
+Zero data: 690,2641915
+Zero data: 691,2651831
+Zero data: 692,2653022
+Zero data: 693,2653605
+Zero data: 694,2655715
+Zero data: 695,2661985
+Zero data: 696,2683285
+Zero data: 697,2683333
+Zero data: 698,2686543
+Zero data: 699,2695459
+Zero data: 700,2696588
+Zero data: 701,2699295
+Zero data: 702,2709862
+Zero data: 703,2719368
+Zero data: 704,2723726
+Zero data: 705,2723802
+Zero data: 706,2733378
+Zero data: 707,2739553
+Zero data: 708,2745339
+Zero data: 709,2750180
+Zero data: 710,2750238
+Zero data: 711,2750286
+Zero data: 712,2773242
+Zero data: 713,2774901
+Zero data: 714,2775128
+Zero data: 715,2784882
+Zero data: 716,2785004
+Zero data: 717,2795345
+Zero data: 718,2796147
+Zero data: 719,2809833
+Zero data: 720,2810016
+Zero data: 721,2825405
+Zero data: 722,2827219
+Zero data: 723,2848542
+Zero data: 724,2849731
+Zero data: 725,2851448
+Zero data: 726,2870182
+Zero data: 727,2879590
+Zero data: 728,2883423
+Zero data: 729,2883815
+Zero data: 730,2883818
+Zero data: 731,2883976
+Zero data: 732,2888108
+Zero data: 733,2888165
+Zero data: 734,2888231
+Zero data: 735,2888484
+Zero data: 736,2890586
+Zero data: 737,2890676
+Zero data: 738,2891419
+Zero data: 739,2891852
+Zero data: 740,2906853
+Zero data: 741,2907133
+Zero data: 742,2907730
+Zero data: 743,2916623
+Zero data: 744,2917496
+Zero data: 745,2917754
+Zero data: 746,2921683
+Zero data: 747,2921698
+Zero data: 748,2923120
+Zero data: 749,2925992
+Zero data: 750,2928829
+Zero data: 751,2929482
+Zero data: 752,2929994
+Zero data: 753,2930193
+Zero data: 754,2931355
+Zero data: 755,2942646
+Zero data: 756,2944076
+Zero data: 757,2944479
+Zero data: 758,2944870
+Zero data: 759,2945490
+Zero data: 760,2945986
+Zero data: 761,2978428
+Zero data: 762,2995100
+Zero data: 763,3007089
+Zero data: 764,3007202
+Zero data: 765,3017139
+Zero data: 766,3029951
+Zero data: 767,3053508
+Zero data: 768,3064624
+Zero data: 769,3064625
+Zero data: 770,3072045
+Zero data: 771,3072326
+Zero data: 772,3072600
+Zero data: 773,3074565
+Zero data: 774,3086489
+Zero data: 775,3100276
+Zero data: 776,3101480
+Zero data: 777,3103139
+Zero data: 778,3108295
+Zero data: 779,3109993
+Zero data: 780,3110545
+Zero data: 781,3127263
+Zero data: 782,3127323
+Zero data: 783,3144731
+Zero data: 784,3144906
+Zero data: 785,3149776
+Zero data: 786,3150390
+Zero data: 787,3150391
+Zero data: 788,3166051
+Zero data: 789,3179885
+Zero data: 790,3191009
+Zero data: 791,3191051
+Zero data: 792,3193405
+Zero data: 793,3198555
+Zero data: 794,3202117
+Zero data: 795,3205729
+Zero data: 796,3207388
+Zero data: 797,3227006
+Zero data: 798,3244290
+Zero data: 799,3244712
+Zero data: 800,3244960
+Zero data: 801,3245265
+Zero data: 802,3284128
+Zero data: 803,3292816
+Zero data: 804,3310672
+Zero data: 805,3314288
+Zero data: 806,3321133
+Zero data: 807,3331047
+Zero data: 808,3349326
+Zero data: 809,3396445
+Zero data: 810,3409727
+Zero data: 811,3416067
+Zero data: 812,3478837
+Zero data: 813,3531494
+Zero data: 814,3534457
+Zero data: 815,3535053
+Zero data: 816,3560358
+Zero data: 817,3562186
+Zero data: 818,3562231
+Zero data: 819,3562524
+Zero data: 820,3575758
+Zero data: 821,3595462
+Zero data: 822,3595692
+Zero data: 823,3610463
+Zero data: 824,3618708
+Zero data: 825,3626051
+Zero data: 826,3641832
+Zero data: 827,3647650
+Zero data: 828,3663987
+Zero data: 829,3667031
+Zero data: 830,3676912
+Zero data: 831,3678990
+Zero data: 832,3692846
+Zero data: 833,3692949
+Zero data: 834,3692959
+Zero data: 835,3692997
+Zero data: 836,3693531
+Zero data: 837,3693534
+Zero data: 838,3709224
+Zero data: 839,3730349
+Zero data: 840,3737180
+Zero data: 841,3740879
+Zero data: 842,3741455
+Zero data: 843,3753432
+Zero data: 844,3779267
+Zero data: 845,3789083
+Zero data: 846,3812025
+Zero data: 847,3820553
+Zero data: 848,3820554
+Zero data: 849,3820625
+Zero data: 850,3834720
+Zero data: 851,3875638
+Zero data: 852,3876264
+Zero data: 853,3880787
+Zero data: 854,3896058
+Zero data: 855,3906392
+Zero data: 856,3907367
+Zero data: 857,3912118
+Zero data: 858,3928190
+Zero data: 859,3939412
+Zero data: 860,3939532
+Zero data: 861,3939555
+Zero data: 862,3955704
+Zero data: 863,3973188
+Zero data: 864,3987746
+Zero data: 865,3988169
+Zero data: 866,3988381
+Zero data: 867,3989383
+Zero data: 868,4005458
+Zero data: 869,4007196
+Zero data: 870,4007248
+Zero data: 871,4007306
+Zero data: 872,4007344
+Zero data: 873,4007349
+Zero data: 874,4011553
+Zero data: 875,4013132
+Zero data: 876,4013395
+Zero data: 877,4013977
+Zero data: 878,4014356
+Zero data: 879,4014954
+Zero data: 880,4021126
+Zero data: 881,4048663
+Zero data: 882,4048664
+Zero data: 883,4059169
+Zero data: 884,4075468
+Zero data: 885,4079148
+Zero data: 886,4079153
+Zero data: 887,4079272
+Zero data: 888,4079981
+Zero data: 889,4080529
+Zero data: 890,4080530
+Zero data: 891,4096208
+Zero data: 892,4113222
+Zero data: 893,4113237
+Zero data: 894,4124171
+Zero data: 895,4127736
+Zero data: 896,4142395
+Zero data: 897,4142431
+Zero data: 898,4143908
+Zero data: 899,4155388
+Zero data: 900,4161557
+Zero data: 901,4180247
+Zero data: 902,4190819
+Zero data: 903,4193425
+Zero data: 904,4215580
+Zero data: 905,4218584
+Zero data: 906,4218585
+Zero data: 907,4218637
+Zero data: 908,4218640
+Zero data: 909,4234647
+Zero data: 910,4244800
+Zero data: 911,4271243
+Zero data: 912,4276069
+Zero data: 913,4287003
+Zero data: 914,4287239
+Zero data: 915,4287994
+Zero data: 916,4289250
+Zero data: 917,4289814
+Zero data: 918,4290620
+Zero data: 919,4290694
+Zero data: 920,4292737
+Zero data: 921,4293064
+Zero data: 922,4293745
+Zero data: 923,4293763
+Zero data: 924,4294102
+Zero data: 925,4294358
+Zero data: 926,4294913
+Zero data: 927,4295774
+Zero data: 928,4296055
+Zero data: 929,4296116
+Zero data: 930,4304438
+Zero data: 931,4304439
+Zero data: 932,4305454
+Zero data: 933,4306193
+Zero data: 934,4306238
+Zero data: 935,4312715
+Zero data: 936,4313408
+Zero data: 937,4314768
+Zero data: 938,4314801
+Zero data: 939,4318255
+Zero data: 940,4338038
+Zero data: 941,4343127
+Zero data: 942,4365114
+Zero data: 943,4368569
+Zero data: 944,4398219
+Zero data: 945,4398221
+Zero data: 946,4411379
+Zero data: 947,4413231
+Zero data: 948,4413385
+Zero data: 949,4413426
+Zero data: 950,4413441
+Zero data: 951,4413976
+Zero data: 952,4413977
+Zero data: 953,4413980
+Zero data: 954,4413981
+Zero data: 955,4414309
+Zero data: 956,4418416
+Zero data: 957,4431456
+Zero data: 958,4437135
+Zero data: 959,4439936
+Zero data: 960,4444012
+Zero data: 961,4446091
+Zero data: 962,4446092
+Zero data: 963,4465355
+Zero data: 964,4467554
+Zero data: 965,4467563
+Zero data: 966,4471741
+Zero data: 967,4480930
+Zero data: 968,4488283
+Zero data: 969,4494408
+Zero data: 970,4514488
+Zero data: 971,4517437
+Zero data: 972,4532873
+Zero data: 973,4550528
+Zero data: 974,4551824
+Zero data: 975,4551825
+Zero data: 976,4554778
+Zero data: 977,4559507
+Zero data: 978,4561945
+Zero data: 979,4576049
+Zero data: 980,4609505
+Zero data: 981,4615701
+Zero data: 982,4615917
+Zero data: 983,4615919
+Zero data: 984,4619171
+Zero data: 985,4619423
+Zero data: 986,4619612
+Zero data: 987,4622721
+Zero data: 988,4660957
+Zero data: 989,4670055
+Zero data: 990,4670067
+Zero data: 991,4678519
+Zero data: 992,4681046
+Zero data: 993,4681457
+Zero data: 994,4708516
+Zero data: 995,4716898
+Zero data: 996,4717856
+Zero data: 997,4718206
+Zero data: 998,4723325
+Zero data: 999,4723993
+Zero data: 1000,4724107
+Zero data: 1001,4724377
+Zero data: 1002,4725517
+Zero data: 1003,4732783
+Zero data: 1004,4745447
+Zero data: 1005,4746265
+Zero data: 1006,4746367
+Zero data: 1007,4746389
+Zero data: 1008,4746390
+Zero data: 1009,4746414
+Zero data: 1010,4746416
+Zero data: 1011,4746417
+Zero data: 1012,4756638
+Zero data: 1013,4756686
+Zero data: 1014,4756710
+Zero data: 1015,4758973
+Zero data: 1016,4763941
+Zero data: 1017,4774700
+Zero data: 1018,4778741
+Zero data: 1019,4782397
+Zero data: 1020,4789413
+Zero data: 1021,4790146
+Zero data: 1022,4840562
+Zero data: 1023,4840830
+Zero data: 1024,4842104
+Zero data: 1025,4844193
+Zero data: 1026,4922158
+Zero data: 1027,4922521
+Zero data: 1028,4922642
+Zero data: 1029,4929032
+Zero data: 1030,4954482
+Zero data: 1031,4954936
+Zero data: 1032,4955275
+Zero data: 1033,4955333
+Zero data: 1034,4955335
+Zero data: 1035,4963307
+Zero data: 1036,4963563
+Zero data: 1037,4963572
+Zero data: 1038,4974796
+Zero data: 1039,4983800
+Zero data: 1040,4992098
+Nq =  200
+N  =  4998759
+dim=  384
+
+Finish loading! 
+LOADING TIME: 7.51059s.
+
+LOADING BENMARK...
+LOADING TIME: 9.2e-05s.
+
+Rank Thred: 0.5, Count: 0, Recall: 0, min_rank: 0.998028, max_rank: 1, avg_rank: 0.999957
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 15670.8 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/tiny5m.knng
+knng size=4998759
+KNNG time: 104.633 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/tiny5m.knng
+./indexes/tiny5m.knng
+k=32
+num=4998759
+Load nn graph
+Data head: 
+0.085184
+0.0881476
+0.171225
+0.091207
+0.082487
+0.140159
+4760014
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Using PSP for sift10M
+LOADING DATA...
+Load from new file: /home/xizhao/dataset/sift10M.data_new
+Nq =  200
+N  =  9999800
+dim=  128
+
+Finish loading! 
+LOADING TIME: 5.78076s.
+
+LOADING BENMARK...
+LOADING TIME: 8.2e-05s.
+
+Rank Thred: 0.5, Count: 3345, Recall: 0.3345, min_rank: 0.111263, max_rank: 0.99995, avg_rank: 0.634159
+K0=32
+Parameters: S=36, R=96, T1=2, T2=4
+Iter 0 : ####Actual memory usage: 21653.2 Mb 
+
+Iter 1 : ####
+Finalizing graph...
+K0 = 32
+Saving KNNG to ./indexes/sift10M.knng
+knng size=9999800
+KNNG time: 211.745 s.
+
+L = 512, R = 40, Angle = 60
+KNNG = ./indexes/sift10M.knng
+./indexes/sift10M.knng
+k=32
+num=9999800
+Load nn graph
+Data head: 
+42
+36
+4
+7
+38
+17
+7601628
+Init done
+sync prune done!
+interinsert done!
+add mips neighbors done!
+Link done
+Degree Statistics: Max = 41, Min = 7, Avg = 35
+Build Time: 797.926
+Data head1: 
+42
+Indexing time: 1030.75 s.
+
+Dim=128, Size=9999800
+Start searching 100 queries with 160 threads
+Average Distance Computation: 551.42
+Average Query Time: 85ms
+Average Query Time: 0.085451ms
+QPS:               1176.47
+
+AVG RECALL:        0.002
+AVG RATIO:         0.80951
+Start searching 100 queries with 160 threads
+Average Distance Computation: 997.81
+Average Query Time: 112ms
+Average Query Time: 0.112364ms
+QPS:               892.857
+
+AVG RECALL:        0.002
+AVG RATIO:         0.837126
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1342.85
+Average Query Time: 134ms
+Average Query Time: 0.134051ms
+QPS:               746.269
+
+AVG RECALL:        0.003
+AVG RATIO:         0.846245
+Start searching 100 queries with 160 threads
+Average Distance Computation: 1754.73
+Average Query Time: 159ms
+Average Query Time: 0.160013ms
+QPS:               628.931
+
+AVG RECALL:        0.006
+AVG RATIO:         0.857432
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2142.53
+Average Query Time: 184ms
+Average Query Time: 0.184975ms
+QPS:               543.478
+
+AVG RECALL:        0.007
+AVG RATIO:         0.863989
+Start searching 100 queries with 160 threads
+Average Distance Computation: 2519.14
+Average Query Time: 208ms
+Average Query Time: 0.208369ms
+QPS:               480.769
+
+AVG RECALL:        0.006
+AVG RATIO:         0.868277
+Start searching 100 queries with 160 threads
+Average Distance Computation: 3473.39
+Average Query Time: 269ms
+Average Query Time: 0.269816ms
+QPS:               371.747
+
+AVG RECALL:        0.006
+AVG RATIO:         0.878837
+Start searching 100 queries with 160 threads
+Average Distance Computation: 4364.77
+Average Query Time: 327ms
+Average Query Time: 0.327229ms
+QPS:               305.81
+
+AVG RECALL:        0.008
+AVG RATIO:         0.889337
+Start searching 100 queries with 160 threads
+Average Distance Computation: 6333.25
+Average Query Time: 455ms
+Average Query Time: 0.455976ms
+QPS:               219.78
+
+AVG RECALL:        0.02
+AVG RATIO:         0.901134
+Start searching 100 queries with 160 threads
+Average Distance Computation: 8160.12
+Average Query Time: 578ms
+Average Query Time: 0.578609ms
+QPS:               173.01
+
+AVG RECALL:        0.026
+AVG RATIO:         0.906647
+Start searching 100 queries with 160 threads
+Average Distance Computation: 9820.07
+Average Query Time: 693ms
+Average Query Time: 0.69386ms
+QPS:               144.3
+
+AVG RECALL:        0.033
+AVG RATIO:         0.914953
+Start searching 100 queries with 160 threads
+Average Distance Computation: 11638.9
+Average Query Time: 822ms
+Average Query Time: 0.8225ms
+QPS:               121.654
+
+AVG RECALL:        0.032
+AVG RATIO:         0.916927
+Start searching 100 queries with 160 threads
+Average Distance Computation: 22120.7
+Average Query Time: 1645ms
+Average Query Time: 1.64544ms
+QPS:               60.7903
+
+AVG RECALL:        0.067
+AVG RATIO:         0.935837
+Start searching 100 queries with 160 threads
+Average Distance Computation: 31867.8
+Average Query Time: 2541ms
+Average Query Time: 2.54109ms
+QPS:               39.3546
+
+AVG RECALL:        0.098
+AVG RATIO:         0.946149
+Start searching 100 queries with 160 threads
+Average Distance Computation: 42034.7
+Average Query Time: 3583ms
+Average Query Time: 3.58369ms
+QPS:               27.9096
+
+AVG RECALL:        0.122
+AVG RATIO:         0.951204
+Start searching 100 queries with 160 threads
+Average Distance Computation: 55180.1
+Average Query Time: 5128ms
+Average Query Time: 5.12843ms
+QPS:               19.5008
+
+AVG RECALL:        0.152
+AVG RATIO:         0.957035
+Start searching 100 queries with 160 threads
+Average Distance Computation: 68187.7
+Average Query Time: 7036ms
+Average Query Time: 7.03693ms
+QPS:               14.2126
+
+AVG RECALL:        0.179
+AVG RATIO:         0.960951
+Searching time: 1067.01 s.
+
+*******************************************************************************************************
+The result of FARGO for sift10M is as follow: c=0.3, k=50
+*******************************************************************************************************
+     algName           c           L           K         QPS        Time      Recall       Ratio        Cost
+
+         PSP           1          10          10     1176.47      0.0085       0.002     0.80951      551.42
+         PSP           1          20          10     892.857      0.0112       0.002    0.837126      997.81
+         PSP           1          30          10     746.269      0.0134       0.003    0.846245     1342.85
+         PSP           1          40          10     628.931      0.0159       0.006    0.857432     1754.73
+         PSP           1          50          10     543.478      0.0184       0.007    0.863989     2142.53
+         PSP           1          60          10     480.769      0.0208       0.006    0.868277     2519.14
+         PSP           1          85          10     371.747      0.0269       0.006    0.878837     3473.39
+         PSP           1         110          10      305.81      0.0327       0.008    0.889337     4364.77
+         PSP           1         160          10      219.78      0.0455        0.02    0.901134     6333.25
+         PSP           1         210          10      173.01      0.0578       0.026    0.906647     8160.12
+         PSP           1         260          10       144.3      0.0693       0.033    0.914953     9820.07
+         PSP           1         310          10     121.654      0.0822       0.032    0.916927     11638.9
+         PSP           1         610          10     60.7903      0.1645       0.067    0.935837     22120.7
+         PSP           1         910          10     39.3546      0.2541       0.098    0.946149     31867.8
+         PSP           1        1210          10     27.9096      0.3583       0.122    0.951204     42034.7
+         PSP           1        1610          10     19.5008      0.5128       0.152    0.957035     55180.1
+         PSP           1        2010          10     14.2126      0.7036       0.179    0.960951     68187.7
+
+******************************************************************************************************
+                                                                                    10-15 15:44
+*****************************************************************************************************
+
+
